@@ -6,7 +6,7 @@ Following packages are required before we proceed.
 2. Conda
 
 ## Setup Steps
-1. Clone this repo and go inside the root directory. 
+1. Clone this repo and go inside the <path_till_your_repo>/task_manager directory. ex: /Users/ashishkumar/git_branches/task_manager/task_manager
 2. Create conda environment: `conda create -n task_manager python=3.10`
 3. Install postgres: `brew install postgresql`
 4. Start postgres: `brew services start postgresql`
