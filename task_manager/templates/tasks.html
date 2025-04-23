@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Add New Task</h2>
+    <form method="POST" action="{{ url_for('add_task') }}" class="task-form">
+        {{ add_form.hidden_tag() }}
+        <div class="form-group">
+            {{ add_form.name.label }}<br>
+            {{ add_form.name(size=40) }}
+            {% for error in add_form.name.errors %}
+                <span class="error">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ add_form.submit(class='btn btn-primary') }}
+        </div>
+    </form>
+
+    <hr>
+
+    <h2>Your Tasks</h2>
+
+    <!-- Filter Links -->
+    <div class="filter-controls">
+        Filter by status:
+        <a href="{{ url_for('index', status_filter='all') }}" class="{% if current_filter == 'all' %}active-filter{% endif %}">All</a> |
+        <a href="{{ url_for('index', status_filter='in progress') }}" class="{% if current_filter == 'in progress' %}active-filter{% endif %}">In Progress</a> |
+        <a href="{{ url_for('index', status_filter='completed') }}" class="{% if current_filter == 'completed' %}active-filter{% endif %}">Completed</a> |
+        <a href="{{ url_for('index', status_filter='failed') }}" class="{% if current_filter == 'failed' %}active-filter{% endif %}">Failed</a>
+    </div>
+    <!-- End Filter Links -->
+
+    {% if tasks %}
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li class="task-item task-{{ task.status.replace(' ', '-') }}">
+                    <div class="task-details">
+                        <strong>{{ task.name }}</strong> ({{ task.status }})
+                        <small>Created: {{ task.timestamp.strftime('%Y-%m-%d %H:%M') }}</small>
+                    </div>
+
+                    <div class="task-actions">
+                        <!-- Update Form -->
+                        <form method="POST" action="{{ url_for('update_task', task_id=task.id) }}" class="inline-form">
+                            {{ update_form.hidden_tag() }} <!-- Use a single update_form instance passed from view -->
+                            <!-- Populate fields with current task data -->
+                            {{ update_form.name(value=task.name, size=20) }}
+                            {{ update_form.status(class='status-select') }}
+                            <script>
+                                // Set the selected option for the status dropdown
+                                const selectElement = document.querySelector(`form[action="{{ url_for('update_task', task_id=task.id) }}"] select[name="status"]`);
+                                if (selectElement) { // Ensure element exists before setting value
+                                    selectElement.value = "{{ task.status }}";
+                                }
+                            </script>
+                            {{ update_form.submit(value='Update', class='btn btn-secondary') }}
+                             {% for field, errors in update_form.errors.items() if field != 'csrf_token' %}
+                                {% for error in errors %}
+                                     <span class="error">[{{ error }}]</span>
+                                {% endfor %}
+                            {% endfor %}
+                        </form>
+
+                        <!-- Delete Button -->
+                        <form method="POST" action="{{ url_for('delete_task', task_id=task.id) }}" class="inline-form">
+                           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> <!-- Manual CSRF token needed if not using WTForms for delete -->
+                           <button type="submit" class="btn btn-danger" {% if task.status != 'completed' %}disabled title="Task must be completed to delete"{% endif %}>
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no tasks yet!</p>
+    {% endif %}
+
+{% endblock %} 

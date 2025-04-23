@@ -1,0 +1,273 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Navigation */
+nav {
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space out items */
+    align-items: center; /* Vertically center items */
+}
+
+nav a {
+    text-decoration: none;
+    color: #007bff;
+    margin-right: 15px; /* Spacing between links */
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav span {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Flash Messages */
+.flash-messages {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.flash-messages li {
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+
+.flash-messages .success { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
+.flash-messages .danger { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+.flash-messages .warning { background-color: #fff3cd; color: #856404; border-color: #ffeeba; }
+.flash-messages .info { background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; }
+
+/* Forms General */
+form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    margin-right: 5px; /* Space between buttons */
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+.btn-primary:hover { background-color: #0056b3; }
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+.btn-secondary:hover { background-color: #5a6268; }
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-danger:hover { background-color: #c82333; }
+.btn-danger:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* Filter Controls */
+.filter-controls {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+}
+
+.filter-controls a {
+    text-decoration: none;
+    color: #007bff;
+    margin: 0 5px;
+}
+
+.filter-controls a:hover {
+    text-decoration: underline;
+}
+
+.filter-controls .active-filter {
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    cursor: default;
+}
+/* End Filter Controls */
+
+.error {
+    color: #dc3545; /* Bootstrap danger color */
+    font-size: 0.9em;
+    display: block;
+    margin-top: 4px;
+}
+
+/* Task List */
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.task-item.task-completed {
+    background-color: #e9f5e9; /* Light green for completed tasks */
+    border-left: 5px solid #28a745; /* Green accent */
+}
+
+.task-item.task-in-progress {
+     border-left: 5px solid #ffc107; /* Yellow accent */
+}
+
+.task-item.task-failed {
+    background-color: #f8d7da; /* Light red for failed */
+    border-left: 5px solid #dc3545; /* Red accent */
+}
+
+.task-details {
+    flex-grow: 1; /* Take available space */
+    margin-right: 15px; /* Space before actions */
+}
+
+.task-details strong {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 3px;
+}
+
+.task-details small {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+}
+
+.task-actions .inline-form {
+    display: flex; /* Align form elements inline */
+    align-items: center;
+    margin: 5px 5px 5px 0; /* Spacing around forms */
+}
+
+.task-actions .inline-form input[type="text"],
+.task-actions .inline-form select {
+    width: auto; /* Don't take full width */
+    margin-right: 5px;
+    flex-grow: 1; /* Allow input to grow */
+}
+
+.task-actions .inline-form select.status-select {
+    min-width: 120px; /* Give status select a decent width */
+}
+
+.task-actions .inline-form button,
+.task-actions .inline-form input[type="submit"] {
+    margin-left: 5px; /* Space before button */
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 25px 0;
+}
+
+/* Responsive adjustments (optional) */
+@media (max-width: 768px) {
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .task-actions {
+        width: 100%;
+        margin-top: 10px;
+        justify-content: flex-start;
+    }
+    .task-actions .inline-form {
+        margin-bottom: 10px;
+        width: 100%; /* Make forms stack vertically if needed */
+    }
+    .task-actions .inline-form input[type="text"],
+    .task-actions .inline-form select {
+       /* flex-grow: 1; Remove or adjust if causing issues */
+    }
+
+} 
